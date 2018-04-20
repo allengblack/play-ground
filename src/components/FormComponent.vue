@@ -1,5 +1,6 @@
 <template>
   <div class="form">
+      form
       <p>
         <input type="text" v-model="formData.msg" lazy>
       </p>
@@ -32,17 +33,21 @@
 
 <script>
 export default {
-    data () {
-        return {
-        formData : {
-            msg : 'hi!',
-            checked  : true,
-            picked   : 'one',
-            selected : 'two',
-            multiSelect: ['one', 'three'],
-        },
-    }
-  },
+    props: {
+        formData: {},
+    },
+
+    // data () {
+    //     return {
+    //     formData : {
+    //         msg : 'hi!',
+    //         checked  : true,
+    //         picked   : 'one',
+    //         selected : 'two',
+    //         multiSelect: ['one', 'three'],
+    //     },
+    // }
+//   },
   
 }
 </script>

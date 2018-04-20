@@ -1,5 +1,6 @@
 <template>
   <div class="form">
+    display
       <p>
         Message: {{ formData.msg }}
       </p>
@@ -36,11 +37,9 @@
 <script>
 export default {
   props: {
-    formData: {
-      type: Object,
-    },
+    formData: {},
   },
-  
+
   //   data () {
   //       return {
   //       formData : {

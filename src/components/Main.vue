@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <button @click="editing = !editing">Edit/Save</button>
-    <div v-if="editing"><form-comp></form-comp></div>
-    <div v-else><disp-comp></disp-comp></div>
+    <div v-if="editing"><form-comp :formData="formData"></form-comp></div>
+    <div v-else><disp-comp :formData="formData"></disp-comp></div>
   </div>
 </template>
 
@@ -19,7 +19,15 @@ export default {
   
   data() {
     return {
-      editing: "false"
+      editing: "false",
+
+      formData : {
+            msg : 'hi!',
+            checked  : true,
+            picked   : 'one',
+            selected : 'two',
+            multiSelect: ['one', 'three'],
+        },
     }
   }
 }
