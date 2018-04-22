@@ -1,54 +1,47 @@
 <template>
   <div class="form">
-      form
-      <p>
-        <input type="text" v-model="formData.msg" lazy>
-      </p>
-      <p>
-        <input type="checkbox" v-model="formData.checked">
-      </p>
-      <p>
-        <input type="radio" name="picked" value="one" v-model="formData.picked">
-        <input type="radio" name="picked" value="two" v-model="formData.picked">
-      </p>
-
-      <p>
-        <select v-model="formData.selected">
-          <option>one</option>
-          <option>two</option>
-        </select>
-      </p>
-
-      <p>
-        <select v-model="formData.multiSelect" multiple>
-          <option>one</option>
-          <option>two</option>
-          <option>three</option>
-        </select>
-      </p>
-
-      <p> {{ $data }}</p>
+      <div>
+        {{ person }}
+      </div>
   </div>
 </template>
 
 <script>
+import EventBus from '../event-bus.js';
+import axios from '../restClient';
+
 export default {
-    props: {
-        formData: {},
+  mounted(){
+    EventBus.$on('person-clicked', this.initializePerson);
+  },
+
+  data() {
+    return {
+      person: {},
+    }
+  },
+
+  methods: {
+    initializePerson(id){
+      this.getPerson(id)
+        .then(person => {
+          console.log(person);
+          this.person = person;
+        });
     },
 
-    // data () {
-    //     return {
-    //     formData : {
-    //         msg : 'hi!',
-    //         checked  : true,
-    //         picked   : 'one',
-    //         selected : 'two',
-    //         multiSelect: ['one', 'three'],
-    //     },
-    // }
-//   },
-  
+    getPerson(id) {
+      return axios.get(`/persons/${id}`)
+        .then(res => {
+          console.log(res.data);
+            return res.data;
+
+        })
+        .catch(err => {
+            console.error('Some shit went wrong with Axios for getting one dude, fam.');
+        });
+    }
+  }
 }
 </script>
 
